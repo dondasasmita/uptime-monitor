@@ -25,11 +25,23 @@ const server = http.createServer((req, res) => {
   // Get the headers as object
   let headers = req.headers;
 
-  // Send the response
-  res.end("Hello\n");
-
-  // Log the request
-  console.log("Request received with these headers: ", headers);
+  // Get payload , if any
+  // Create decoder to utf-8
+  let decoder = new StringDecoder("utf-8");
+  // Placeholder for the stream
+  let buffer = "";
+  // When data is received
+  req.on("data", data => {
+    buffer += decoder.write(data);
+  });
+  // Upon end event
+  req.on("end", () => {
+    buffer += decoder.end();
+    // Send the response
+    res.end("Hello\n");
+    // Log the request
+    console.log("Request received with this payload: ", buffer);
+  });
 });
 
 // Start server and listen on port 3000
