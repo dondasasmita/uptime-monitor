@@ -70,6 +70,7 @@ const server = http.createServer((req, res) => {
       let stringPayload = JSON.stringify(payload);
 
       // Return the response
+      res.setHeader("content-type", "application/json");
       res.writeHead(statusCode);
 
       // Send the response
@@ -108,5 +109,6 @@ handlers.notFound = (data, callback) => {
 // Define a request router
 let router = {
   sample: handlers.sample,
-  username: handlers.username
+  username: handlers.username,
+  notFound: handlers.notFound
 };
