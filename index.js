@@ -10,10 +10,12 @@ const StringDecoder = require("string_decoder").StringDecoder;
 // The server responds to all requests
 const server = http.createServer((req, res) => {
   // Get URL and parse it
+  // Passing true to call the query string module
   let parsedURL = url.parse(req.url, true);
 
   // Get the path from the URL
   let path = parsedURL.pathname;
+  // Trim off all the slashes in the path
   let trimmedPath = path.replace(/^\/+|\/+$/g, "");
 
   // Get the query params as object
@@ -95,7 +97,7 @@ handlers.sample = (data, callback) => {
 
 handlers.username = (data, callback) => {
   // Callback HTTP status code and a payload object
-  callback(200, { handlername: "username" });
+  callback(200, { handlername: "hello, username" });
 };
 
 // Not found handler
