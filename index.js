@@ -5,7 +5,7 @@
 // Dependencies
 const http = require("http");
 const url = require("url");
-const StringDecoder = require("string_decoder").StringDecoder;
+const { StringDecoder } = require("string_decoder");
 
 // The server responds to all requests
 const server = http.createServer((req, res) => {
